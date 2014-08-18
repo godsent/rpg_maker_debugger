@@ -52,6 +52,7 @@ class Debugger
     def close_console
       puts WORDS[:bye]        #say good bye
       focus GameWindow.window #focus the game window
+      Console.close
       sleep 1                 #hack, prevent enter in the game window
       raise StopIteration     #stops loop
     end

@@ -17,6 +17,10 @@ class Debugger
         @current_instance.clear_eval
       end
 
+      def close
+        @current_instance = nil
+      end
+
       private
 
       #returns title of the console window
