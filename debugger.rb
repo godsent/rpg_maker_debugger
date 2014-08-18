@@ -1,7 +1,7 @@
 class Debugger
   VERSION = '0.0.1'
   WORDS = {
-    hello: "debug console activated, version: #{VERSION}",
+    hello: "debug console activated from %s, version: #{VERSION}",
     bye:   "good bye"
   }
   TRIGGER = Input::F5
@@ -24,7 +24,7 @@ class Debugger
   class << self
     #Loads Console
     def load_console(binding = Object.__send__(:binding))
-      puts WORDS[:hello]   #say hello
+      say_hello binding
       focus Console.window #focus on debug console window
       Console.run(binding) #run with binding
     end
@@ -41,6 +41,12 @@ class Debugger
     end
 
     private
+
+    def say_hello(binding) #greeting words
+      klass, method_name = binding.eval('[self.class, __method__]')
+      separator = klass.instance_methods.include?(method_name) ? '#' : '.'
+      puts WORDS[:hello] % "#{klass.name}#{separator}#{method_name}"
+    end
 
     #closes console
     def close_console
