@@ -22,9 +22,10 @@ class Debugger
   CLOSE_SIGNAL = 'exit'
 
   class << self
-    def render(binding)
-      Renderer.render binding
+    def render(binding, render_constants = false)
+      Renderer.render binding, render_constants
     end
+
     #Loads Console
     def load_console(binding = Object.__send__(:binding))
       say_hello binding
