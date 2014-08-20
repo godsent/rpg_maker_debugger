@@ -22,6 +22,9 @@ class Debugger
   CLOSE_SIGNAL = 'exit'
 
   class << self
+    def render(binding)
+      Renderer.render binding
+    end
     #Loads Console
     def load_console(binding = Object.__send__(:binding))
       say_hello binding
@@ -67,3 +70,4 @@ end
 
 require 'debugger/console'
 require 'debugger/game_window'
+require 'debugger/renderer'
