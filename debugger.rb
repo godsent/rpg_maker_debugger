@@ -47,8 +47,8 @@ class Debugger
     private
 
     def say_hello(binding) #greeting words
-      klass, method_name = binding.eval('[self.class, __method__]')
-      separator = klass.instance_methods.include?(method_name) ? '#' : '.'
+      klass, separator = binding.eval "is_a?(Class) ? [self, '.'] : [self.class, '#']"
+      method_name      = binding.eval '__method__'
       puts WORDS[:hello] % "#{klass.name}#{separator}#{method_name}"
     end
 
