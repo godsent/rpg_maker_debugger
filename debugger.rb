@@ -1,5 +1,5 @@
 class Debugger
-  VERSION = '0.0.1'
+  VERSION = '0.0.2'
   WORDS = {
     hello: "debug console activated from %s, version: #{VERSION}",
     bye:   "good bye"
