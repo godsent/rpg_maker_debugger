@@ -6,6 +6,7 @@ Debbuger для RPG Maker VX ACE. Позволяет загрузить конс
 ###Как подключить
 - Как гем при помощи https://github.com/godsent/rpg-maker-side-script-loader
 - Как скрипт добавив содержимое batch.rb в скрипты вашего проекта
+
 Так же обязательно поставьте галочку в мейкере Game > Show Console (Игра > Показать консоль)
 
 ###Как ставить break points
