@@ -74,3 +74,5 @@ require 'debugger/game_window'
 require 'debugger/renderer'
 
 require 'debugger/patch'
+
+require 'debugger/stack'
