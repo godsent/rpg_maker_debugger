@@ -1,16 +1,32 @@
-$call_stack = []
-
-set_trace_func proc { |event, file, line, id, binding, classname|
-	unless classname.to_s =~ /Debugger/
-		if event == "call"
-			method_name = binding.eval "__method__"
-			args = binding.eval "method(__method__).parameters"
-			args.each { |arg|
-				
-			}
-			$call_stack.push(classname.to_s + ":" + method_name.to_s + " " + args.inspect)
-		elsif event == "return"
-			$call_stack.pop
-		end
+# своровано у Ёльфа
+# код, став€щий в соответствие номеру скрипта его название
+if RUBY_VERSION.to_f==1.9
+  scripts=load_data('Data/Scripts.rvdata2')
+else
+  scripts=load_data('Data/Scripts.rxdata')
+end
+$script_names=[]
+scripts.each{ |item|
+	if RUBY_VERSION.to_f==1.9
+		$script_names+=[item[1]]
+	else
+		text=item.to_s.match(/[\d]+([\w_\d]+)/)[1]
+		$script_names+=[ text.gsub(/x$/){''} ]
 	end
 }
+
+
+module Kernel
+	
+	def call_stack
+		stack = caller
+		stack.each {|line| 
+			# skip first lines connected to debugger itself
+			next if line =~ /\/lib\/debugger/
+			line.gsub!(/\{(\d+)\}/) {|s| $script_names[$1.to_i] + " " } 
+			p line
+		}
+		return nil
+	end
+
+end
